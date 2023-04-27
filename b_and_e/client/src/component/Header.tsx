@@ -4,15 +4,15 @@ import styled from "styled-components";
 import logo from '../img/logo.png';
 
 const LoginBtn = styled.button``;
-const SigninBtn = styled.button``;
+const SignupBtn = styled.button``;
 
 export default function Header() {
   const navigate = useNavigate();
   const loginBtnClick = () => {
     navigate('/login');
   }
-  const signinBtnClick = () => {
-    navigate('/signin')
+  const signupBtnClick = () => {
+    navigate('/signup')
   }
   return (
     <div>
@@ -24,7 +24,7 @@ export default function Header() {
       </header>
       header(로그인, 회원가입)
       <LoginBtn onClick={loginBtnClick}>로그인</LoginBtn>
-      <SigninBtn onClick={signinBtnClick}>회원가입</SigninBtn>
+      <SignupBtn onClick={signupBtnClick}>회원가입</SignupBtn>
     </div>
   );
 }

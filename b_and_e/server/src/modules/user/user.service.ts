@@ -15,10 +15,10 @@ export class UserService {
 
   //async getEmailCheck() {}
 
-  async signIn(
-    signInDto: UserCredentialDto,
+  async signUp(
+    signUpDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    return this.userRepository.createUser(signInDto);
+    return this.userRepository.createUser(signUpDto);
   }
 
   //async logIn() {}

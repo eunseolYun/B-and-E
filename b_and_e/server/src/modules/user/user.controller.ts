@@ -8,11 +8,11 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   //일반회원가입
-  @Post('/signin')
-  signIn(
-    @Body(ValidationPipe) signInDto: UserCredentialDto,
+  @Post('/signUp')
+  signUp(
+    @Body(ValidationPipe) signUpDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    return this.userService.signIn(signInDto);
+    return this.userService.signUp(signUpDto);
   }
 
   //중복검사(emailcheck)
