@@ -11,9 +11,9 @@ import * as bcrypt from 'bcryptjs';
 @CustomRepository(User)
 export class UserRepository extends Repository<User> {
   async createUser(
-    signUpDto: UserCredentialDto,
+    signInDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    const { email, password, name, sex, birth, phone, loginMethod } = signUpDto;
+    const { email, password, name, sex, birth, phone, loginMethod } = signInDto;
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = this.create({

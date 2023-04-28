@@ -1,27 +1,18 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Req,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
 import { LoginDto } from './dto/login.dto';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
   //일반회원가입
-  @Post('/signUp')
-  signUp(
-    @Body(ValidationPipe) signUpDto: UserCredentialDto,
+  @Post('/signin')
+  signIn(
+    @Body(ValidationPipe) signInDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    return this.userService.signUp(signUpDto);
+    return this.userService.signIn(signInDto);
   }
 
   //중복검사(emailcheck)
@@ -29,13 +20,6 @@ export class UserController {
   logIn(
     @Body(ValidationPipe) loginDto: LoginDto,
   ): Promise<{ message: string; data: object; statusCode: number }> {
-    // console.log(loginDto, '컨트롤러');
     return this.userService.logIn(loginDto);
-  }
-
-  @Get('/userinfo')
-  @UseGuards(AuthGuard())
-  getUserInfo(@Req() req) {
-    // return this.userService
   }
 }

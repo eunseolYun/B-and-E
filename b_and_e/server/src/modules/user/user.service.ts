@@ -1,5 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserRepository } from './user.repository';
+// import { JwtService } from '@nestjs/jwt';
 import { UserCredentialDto } from './dto/user-credential.dto';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
@@ -14,17 +15,16 @@ export class UserService {
 
   //async getEmailCheck() {}
 
-  async signUp(
-    signUpDto: UserCredentialDto,
+  async signIn(
+    signInDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    return this.userRepository.createUser(signUpDto);
+    return this.userRepository.createUser(signInDto);
   }
 
   //async logIn() {}
   async logIn(
     loginDto: LoginDto,
   ): Promise<{ message: string; data: object; statusCode: number }> {
-    // console.log(loginDto, '서비스');
     const { email, password } = loginDto;
 
     const user = await this.userRepository.findOne({ where: { email } });
@@ -40,10 +40,9 @@ export class UserService {
         loginMethod,
         created_at,
         updated_at,
-      } = user; //payload
-      console.log(user);
+      } = user;
 
-      const accessToken = await this.token.sign({
+      const accessToken = this.token.sign({
         id,
         email,
         name,
