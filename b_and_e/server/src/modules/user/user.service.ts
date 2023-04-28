@@ -65,7 +65,6 @@ export class UserService {
     }
   }
   async userInfo(req) {
-    console.log('유저서비스 유저인포', req);
     return {
       message: 'success to get userinfo',
       userInfo: req,
