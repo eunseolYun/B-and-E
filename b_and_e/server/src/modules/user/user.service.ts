@@ -13,15 +13,13 @@ export class UserService {
     private token: JwtService,
   ) {}
 
-  //async getEmailCheck() {}
-
-  async signIn(
-    signInDto: UserCredentialDto,
+  // 중복이메일검사
+  async signUp(
+    signUpDto: UserCredentialDto,
   ): Promise<{ message: string; statusCode: number }> {
-    return this.userRepository.createUser(signInDto);
+    return this.userRepository.createUser(signUpDto);
   }
 
-  //async logIn() {}
   async logIn(
     loginDto: LoginDto,
   ): Promise<{ message: string; data: object; statusCode: number }> {
@@ -65,5 +63,12 @@ export class UserService {
     } else {
       throw new UnauthorizedException('invalid user information');
     }
+  }
+  async userInfo(req) {
+    console.log('유저서비스 유저인포', req);
+    return {
+      message: 'success to get userinfo',
+      userInfo: req,
+    };
   }
 }
