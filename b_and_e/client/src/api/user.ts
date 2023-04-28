@@ -17,7 +17,7 @@ const userApi = {
     return api.post('/user/login', info);
   },
   getUserInfo: (accessToken: string) => {
-    return api.get('/token', {
+    return api.get('/user/userinfo', {
       headers: { Authorization: `Bearer ${accessToken}`}
     });
   }
