@@ -11,10 +11,11 @@ import { UserService } from './user.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
 import { LoginDto } from './dto/login.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
 
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, jwtStrategy: JwtStrategy) {}
 
   //일반회원가입
   @Post('/signUp')
@@ -29,13 +30,12 @@ export class UserController {
   logIn(
     @Body(ValidationPipe) loginDto: LoginDto,
   ): Promise<{ message: string; data: object; statusCode: number }> {
-    // console.log(loginDto, '컨트롤러');
     return this.userService.logIn(loginDto);
   }
 
   @Get('/userinfo')
   @UseGuards(AuthGuard())
   getUserInfo(@Req() req) {
-    // return this.userService
+    return this.userService.userInfo(req.user);
   }
 }

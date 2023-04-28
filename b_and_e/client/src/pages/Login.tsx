@@ -49,23 +49,23 @@ export default function Login() {
       //   password: inputValue.password
       // })
         
-      await fetch(`${process.env.REACT_APP_BASE_URL}/user/login`, {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
-      }).then((res) => {
-        res.json();
-      }).then((res) => {
-        console.log(res)
-      });
+      // await fetch(`${process.env.REACT_APP_BASE_URL}/user/login`, {
+      //   method: 'POST',
+      //   body: JSON.stringify({ email, password }),
+      //   headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+      // }).then((res) => {
+      //   res.json();
+      // }).then((res) => {
+      //   console.log(res)
+      // });
       
-      // await userApi.login({ email, password })
-      //   .then((res) => {
-      //     console.log(res.data);
-      //     getUserInfo(res.data.data.accessToken);
-      //   }).then((res) => console.log(res)).catch(() => {
-      //     setEmailCheckMessage('등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.');
-      //   })
+      await userApi.login({ email, password })
+        .then((res) => {
+          console.log(res.data);
+          getUserInfo(res.data.data.accessToken);
+        }).then((res) => console.log(res)).catch(() => {
+          setEmailCheckMessage('등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.');
+        })
       
     }
   }

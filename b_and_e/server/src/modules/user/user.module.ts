@@ -5,7 +5,6 @@ import { UserRepository } from './user.repository';
 import { TypeOrmExModule } from '../typeorm-ex.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-// import { TokenService } from '../token/token.service';
 import { JwtStrategy } from './jwt.strategy';
 
 @Module({
