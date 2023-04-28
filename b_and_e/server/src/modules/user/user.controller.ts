@@ -1,7 +1,16 @@
-import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserCredentialDto } from './dto/user-credential.dto';
 import { LoginDto } from './dto/login.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
@@ -20,6 +29,13 @@ export class UserController {
   logIn(
     @Body(ValidationPipe) loginDto: LoginDto,
   ): Promise<{ message: string; data: object; statusCode: number }> {
+    // console.log(loginDto, '컨트롤러');
     return this.userService.logIn(loginDto);
+  }
+
+  @Get('/userinfo')
+  @UseGuards(AuthGuard())
+  getUserInfo(@Req() req) {
+    // return this.userService
   }
 }

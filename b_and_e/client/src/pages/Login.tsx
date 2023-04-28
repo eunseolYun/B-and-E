@@ -1,17 +1,22 @@
 import { debounce } from "debounce";
 import React, { useState } from "react";
 import styled from "styled-components";
+import userApi from "../api/user";
+// import { useSelector } from "react-redux";
+// import { user } from "../redux/modules/userSlice";
 
 const InputName = styled.div``;
 const Input = styled.input``;
 
 export default function Login() {
+  // const { isLogin, accessToken } = useSelector((userReducer: user) => userReducer);
   const [inputValue, setInputValue] = useState({
-    id: '',
+    email: '',
     password: '',
     isAdvisor: false,
   });
   const [isCheck, setIsCheck] = useState(false);
+  const [emailCheckMessage, setEmailCheckMessage] = useState('');
 
   const handleInputChange = debounce(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,23 +32,53 @@ export default function Login() {
     console.log(e.target.checked)
     const { name, checked } = e.target;
     setInputValue({ ...inputValue, [name]: checked })
-    console.log(inputValue)
   };
 
-  const handleLogin = () => {
-
+  const getUserInfo = async (accessToken:string) => {
+    //유저 정보 가져오기
+    console.log(accessToken)
+    return await userApi.getUserInfo(accessToken)
+      .then((res) => console.log('유저인포를 보자', res));
+  }; 
+  const handleLogin = async() => {
+    console.log(inputValue);
+    if (!inputValue.isAdvisor) {
+      let { email, password } = inputValue;
+      // await userApi.login({
+      //   email: inputValue.email,
+      //   password: inputValue.password
+      // })
+        
+      await fetch(`${process.env.REACT_APP_BASE_URL}/user/login`, {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+      }).then((res) => {
+        res.json();
+      }).then((res) => {
+        console.log(res)
+      });
+      
+      // await userApi.login({ email, password })
+      //   .then((res) => {
+      //     console.log(res.data);
+      //     getUserInfo(res.data.data.accessToken);
+      //   }).then((res) => console.log(res)).catch(() => {
+      //     setEmailCheckMessage('등록되지 않은 아이디이거나 아이디 또는 비밀번호를 잘못 입력했습니다.');
+      //   })
+      
+    }
   }
 
   return (
     <>
       <p>Log in</p>
       <div>
-
         <div>
           <InputName>아이디</InputName>
           <Input
-            id='id'
-            name='id'
+            id='email'
+            name='email'
             placeholder='아이디를 입력해 주세요'
             onChange={handleInputChange}
           />
@@ -55,7 +90,8 @@ export default function Login() {
             name='password'
             placeholder='비밀번호를 입력해 주세요'
             onChange={handleInputChange}
-          />
+            />
+          <div>{emailCheckMessage}</div>
         </div>
         <input
           name='isAdvisor'
@@ -67,7 +103,7 @@ export default function Login() {
         <label htmlFor='isAdvisor'>상담사로 로그인하기</label>
       </div>
       <button onClick={handleLogin}>로그인</button>
-      <button>회원가입</button>
+      <button >회원가입</button>
       <button>카카오 로그인</button>
     </>
   );
