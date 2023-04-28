@@ -15,7 +15,7 @@ import { JwtStrategy } from './jwt.strategy';
 
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService, jwtStrategy: JwtStrategy) {}
+  constructor(private userService: UserService) {}
 
   //일반회원가입
   @Post('/signUp')
