@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from '../img/logo.png';
+import logo from '../img/logo/logo.png';
 
 const LoginBtn = styled.button``;
 const SignupBtn = styled.button``;
