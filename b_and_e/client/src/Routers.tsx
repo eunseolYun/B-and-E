@@ -6,6 +6,7 @@ import Nav from "./component/Nav";
 import Header from "./component/Header";
 import Signup from "./pages/Signup";
 import UserList from "./pages/UserList";
+import Message from "./pages/Message";
 
 export default function Routers() {
     return (
@@ -17,6 +18,7 @@ export default function Routers() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/userlist" element={<UserList />} />
+                <Route path="/message" element={<Message />} />
             </Routes>
         </BrowserRouter>
     );
