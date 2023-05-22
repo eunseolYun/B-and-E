@@ -5,8 +5,6 @@ import userApi from "../api/user";
 // import { useSelector } from "react-redux";
 // import { user } from "../redux/modules/userSlice";
 
-const InputName = styled.div``;
-const Input = styled.input``;
 
 export default function Login() {
   // const { isLogin, accessToken } = useSelector((userReducer: user) => userReducer);
@@ -108,3 +106,6 @@ export default function Login() {
     </>
   );
 }
+
+const InputName = styled.div``;
+const Input = styled.input``;
