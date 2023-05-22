@@ -5,18 +5,19 @@ import Login from "./pages/Login";
 import Nav from "./component/Nav";
 import Header from "./component/Header";
 import Signup from "./pages/Signup";
+import UserList from "./pages/UserList";
 
 export default function Routers() {
-  return (
-    <BrowserRouter>
-      <Nav />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Nav />
+            <Header />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/userlist" element={<UserList />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
